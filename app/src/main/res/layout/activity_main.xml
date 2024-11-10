@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/fondo2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:background="@color/fondo2"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_marginLeft="90dp"
+                    android:layout_width="230dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="9dp"
+                    app:srcCompat="@drawable/logopet2_photoroom" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="460dp"
+                android:layout_height="245dp"
+                android:layout_marginLeft="-25dp"
+                android:background="@drawable/banner_2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="270dp"
+                    android:layout_height="131dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="60dp"
+                    android:shadowColor="@color/black"
+                    android:shadowDx="@integer/material_motion_duration_long_2"
+                    android:shadowDy="@integer/material_motion_duration_long_2"
+                    android:text="Encuentra a tu nuevo mejor amigo!"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="34dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnPerro"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+
+                        android:layout_margin="10dp"
+
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <ImageButton
+                        android:id="@+id/btnGato"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:layout_margin="10dp"
+
+                        tools:srcCompat="@tools:sample/avatars" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="340dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="@font/allerta"
+                    android:text="Mascotas disponibles para ser adoptadas >"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/morado"
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnAdopcion"
+                android:layout_width="200dp"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Ver mas" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
