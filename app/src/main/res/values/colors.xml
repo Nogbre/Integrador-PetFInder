@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fondo2">#DFDFDF</color>
     <color name="morado">#6504b5</color>
+    <color name="transparente">#00FFFFFF</color>
 
 </resources>
