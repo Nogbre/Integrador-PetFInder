@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="start">
+
+            <!-- Imagen de la mascota encontrada -->
+            <ImageView
+                android:id="@+id/iv_mascota_encontrada"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_button"
+                app:srcCompat="@drawable/gato_f" />
+
+            <!-- Botón para seleccionar la foto -->
+            <Button
+                android:id="@+id/btn_subir_foto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Subir Foto"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/morado"
+                android:padding="12dp" />
+
+            <!-- Nombre de la mascota (opcional) -->
+            <EditText
+                android:id="@+id/et_nombre_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Nombre de la mascota (opcional)"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button" />
+
+            <!-- Raza (opcional) -->
+            <EditText
+                android:id="@+id/et_raza_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Raza de la mascota (opcional)"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button" />
+
+            <!-- Tamaño -->
+            <EditText
+                android:id="@+id/et_tamano_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Tamaño de la mascota (Pequeño, Mediano, Grande)"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button" />
+
+            <!-- Color -->
+            <EditText
+                android:id="@+id/et_color_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Color de la mascota"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button" />
+
+            <!-- Especie -->
+            <EditText
+                android:id="@+id/et_especie_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Especie de la mascota (Perro, Gato.)"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button" />
+
+            <!-- Sexo -->
+            <EditText
+                android:id="@+id/et_sexo_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Sexo de la mascota (Macho, Hembra)"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button" />
+
+            <!-- Descripción de la mascota -->
+            <EditText
+                android:id="@+id/et_descripcion_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Descripción de la mascota encontrada"
+                android:inputType="textMultiLine"
+                android:textSize="16sp"
+                android:maxLines="5"
+                android:lines="4"
+                android:background="@drawable/rounded_button" />
+
+            <!-- Ubicación de la mascota encontrada -->
+            <TextView
+                android:id="@+id/tv_ubicacion_encontrada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Ubicación de la mascota encontrada"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/morado" />
+
+            <!-- Fragmento de Google Maps para seleccionar ubicación -->
+            <FrameLayout
+                android:id="@+id/map_container_encontrada"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Botón para publicar la mascota encontrada -->
+            <Button
+                android:id="@+id/btn_publicar_encontrada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Publicar Mascota Encontrada"
+                android:backgroundTint="@color/morado"
+                android:textColor="@color/white"
+                android:padding="12dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

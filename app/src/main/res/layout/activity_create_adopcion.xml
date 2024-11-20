@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="start">
+
+            <!-- Título de la pantalla -->
+            <TextView
+                android:id="@+id/tv_titulo_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Publicar Mascota en Adopción"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/morado"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Campos de entrada -->
+            <EditText
+                android:id="@+id/et_nombre_mascota_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre"
+                android:inputType="text"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/et_raza_mascota_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Raza"
+                android:inputType="text"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/et_tamano_mascota_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tamaño (Pequeño, Mediano, Grande)"
+                android:inputType="text"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/et_color_mascota_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Color"
+                android:inputType="text"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/et_especie_mascota_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Especie (Perro, Gato, etc.)"
+                android:inputType="text"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/et_sexo_mascota_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Sexo (Macho, Hembra)"
+                android:inputType="text"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button"
+                android:padding="12dp" />
+
+            <EditText
+                android:id="@+id/et_descripcion_mascota_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripción"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button"
+                android:padding="12dp" />
+
+            <!-- Botón para cargar foto -->
+            <Button
+                android:id="@+id/btn_subir_foto_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Subir Foto"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/morado"
+                android:textColor="@color/white"
+                android:padding="12dp" />
+
+            <!-- Previsualización de la foto cargada -->
+            <ImageView
+                android:id="@+id/iv_foto_previa_adopcion"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_button"
+                app:srcCompat="@drawable/perro_icon" />
+
+
+
+            <!-- Botones para guardar y publicar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/btn_guardar_adopcion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Guardar"
+                    android:backgroundTint="@color/morado"
+                    android:textColor="@color/white"
+                    android:padding="12dp"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btn_publicar_adopcion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Publicar"
+                    android:backgroundTint="@color/morado"
+                    android:textColor="@color/white"
+                    android:padding="12dp"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

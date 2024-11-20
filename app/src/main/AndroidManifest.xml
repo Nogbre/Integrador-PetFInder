@@ -17,6 +17,21 @@
         android:theme="@style/Theme.PetFinder"
         tools:targetApi="31">
         <activity
+            android:name=".Encontradas"
+            android:exported="false" />
+        <activity
+            android:name=".CreateEncontrada"
+            android:exported="false" />
+        <activity
+            android:name=".Adopciones"
+            android:exported="false" />
+        <activity
+            android:name=".CreateAdopcion"
+            android:exported="false" />
+        <activity
+            android:name=".CreatePerdida"
+            android:exported="false" />
+        <activity
             android:name=".Perdidos"
             android:exported="false" />
         <activity

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="start">
+
+            <!-- Imagen principal de la mascota -->
+            <ImageView
+                android:id="@+id/iv_mascota_adopcion"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_button"
+                app:srcCompat="@drawable/perro_icon" />
+
+            <!-- Información general de la mascota -->
+            <TextView
+                android:id="@+id/tv_nombre_mascota_adopcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Nombre de la Mascota"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/morado" />
+
+            <TextView
+                android:id="@+id/tv_raza_mascota_adopcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Raza: Chihuahua"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_edad_mascota_adopcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edad: 2 años"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_tamano_mascota_adopcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Tamaño: Mediano"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_color_mascota_adopcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Color: Marrón"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_especie_mascota_adopcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Especie: Perro"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_sexo_mascota_adopcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sexo: Hembra"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <!-- Descripción de la mascota -->
+            <TextView
+                android:id="@+id/tv_descripcion_mascota_adopcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="16dp"
+                android:background="@drawable/rounded_button"
+                android:text="Esta mascota es muy cariñosa y necesita un hogar lleno de amor. Es ideal para una familia activa."
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Información adicional -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_contacto_adopcion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contacto: 123-456-7890"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_ubicacion_adopcion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ubicación: Parque Principal"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+            <!-- Botón de acción -->
+            <Button
+                android:id="@+id/btn_contactar_adopcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Contactar al adoptante"
+                android:backgroundTint="@color/morado"
+                android:textColor="@color/white"
+                android:padding="12dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
