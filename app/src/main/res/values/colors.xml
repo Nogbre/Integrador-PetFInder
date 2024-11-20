@@ -5,5 +5,7 @@
     <color name="fondo2">#DFDFDF</color>
     <color name="morado">#6504b5</color>
     <color name="transparente">#00FFFFFF</color>
-
+    <color name="purple">#6A1B9A</color>
+    <color name="light_gray">#F3F3F3</color>
+    <color name="gray">#808080</color>
 </resources>

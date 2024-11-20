@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="start">
+
+            <!-- Imagen principal de la mascota -->
+            <ImageView
+                android:id="@+id/iv_mascota_detalle"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_button"
+                app:srcCompat="@drawable/perro_icon" />
+
+            <!-- Información general de la mascota -->
+            <TextView
+                android:id="@+id/tv_nombre_mascota_detalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Nombre de la Mascota"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/morado" />
+
+            <TextView
+                android:id="@+id/tv_raza_mascota_detalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="Raza: Chihuahua"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_edad_mascota_detalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edad: 2 años"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <!-- Descripción de la mascota -->
+            <TextView
+                android:id="@+id/tv_descripcion_mascota_detalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="16dp"
+                android:background="@drawable/rounded_button"
+                android:text="Esta mascota fue vista por última vez cerca del parque principal. Es muy amigable y necesita atención médica."
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4dp" />
+
+            <!-- Información adicional -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_contacto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contacto: 123-456-7890"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_ubicacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ubicación: Parque Principal"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- Fragmento de Google Maps -->
+            <FrameLayout
+                android:id="@+id/map_container"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Campo de notas -->
+
+            <!-- Botón de acción -->
+            <Button
+                android:id="@+id/btn_contactar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Contactar al dueño"
+                android:backgroundTint="@color/morado"
+                android:textColor="@color/white"
+                android:padding="12dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
