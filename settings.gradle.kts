@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PetFinder"
+rootProject.name = "Integrador-PetFInder"
 include(":app")
  

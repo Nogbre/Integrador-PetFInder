@@ -6,4 +6,11 @@
     <color name="morado">#6504b5</color>
     <color name="transparente">#00FFFFFF</color>
 
+
+        <color name="primary_text">#212121</color>
+        <color name="secondary_text">#757575</color>
+        <color name="tertiary_text">#BDBDBD</color>
+        <color name="button_text">#FFFFFF</color>
+        <color name="divider">#E0E0E0</color>
+    <color name="accent">#F6FF7AF7</color>
 </resources>
