@@ -1,4 +1,31 @@
 <resources>
     <string name="app_name">PetFinder</string>
     <string name="api_key">AIzaSyBK4ei3mOTzIDdTHozlQWeDrNnhHfESRao</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="icon_description">Icono principal de la app\n</string>
+
+    <!--Strings del LOGIN -->
+    <string name="app_description">¡Bienvenido a la app más completa!</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="email_label">Correo Electrónico</string>
+    <string name="email_hint">Ingresa tu correo</string>
+    <string name="password_label">Contraseña</string>
+    <string name="password_hint">Ingresa tu contraseña</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="login_button">Ingresar</string>
+    <string name="no_account">¿No tienes cuenta?</string>
+
+    <!--String del REGISTER-->
+
+    <string name="register_title">Registrarse</string>
+    <string name="name_label">Nombre</string>
+    <string name="name_hint">Ingresa tu nombre</string>
+    <string name="last_name_label">Apellido</string>
+    <string name="last_name_hint">Ingresa tu apellido</string>
+    <string name="phone_label">Teléfono</string>
+    <string name="phone_hint">Ingresa tu teléfono</string>
+    <string name="confirm_password_label">Confirmar Contraseña</string>
+    <string name="confirm_password_hint">Confirma tu contraseña</string>
+    <string name="register_button">Registrarse</string>
 </resources>
