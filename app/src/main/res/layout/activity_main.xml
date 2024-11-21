@@ -30,9 +30,8 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_marginLeft="90dp"
-                    android:layout_width="230dp"
-                    android:layout_height="60dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     app:srcCompat="@drawable/logopet2_photoroom" />
 
@@ -63,43 +62,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal">
-
-
-                    <ImageButton
-                        android:id="@+id/imageButton"
-                        android:layout_width="180dp"
-                        android:layout_height="180dp"
-                        android:layout_marginLeft="6dp"
-                        android:background="@color/transparente"
-
-                        app:srcCompat="@drawable/perro_icon" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="180dp"
-                        android:layout_height="168dp"
-                        android:layout_marginLeft="20dp"
-                        android:background="@drawable/rounded_button"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/gato_f" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -291,7 +255,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btnPerdidas"
                 android:layout_width="200dp"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
@@ -323,7 +287,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btnEncontrada"
                 android:layout_width="200dp"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"

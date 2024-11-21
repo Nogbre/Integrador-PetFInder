@@ -18,6 +18,8 @@ import com.example.petfinder.Models.GraphQLResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,8 +49,29 @@ public class RegisterFragment extends Fragment {
             String phone = phoneField.getText().toString().trim();
             String password = passwordField.getText().toString().trim();
 
-            if (name.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
-                Toast.makeText(getContext(), "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+            // Validación de campos
+            if (!isValidName(name)) {
+                Toast.makeText(getContext(), "El nombre solo debe contener letras.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!isValidName(lastName)) {
+                Toast.makeText(getContext(), "El apellido solo debe contener letras.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                Toast.makeText(getContext(), "Por favor, introduce un correo electrónico válido.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!isValidPhone(phone)) {
+                Toast.makeText(getContext(), "El teléfono solo puede contener números y '+'.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (password.isEmpty()) {
+                Toast.makeText(getContext(), "Por favor, completa el campo de contraseña.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -101,5 +124,20 @@ public class RegisterFragment extends Fragment {
         });
 
         return view;
+    }
+
+    // Validación para nombres y apellidos (solo letras)
+    private boolean isValidName(String name) {
+        return Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", name);
+    }
+
+    // Validación de correo electrónico
+    private boolean isValidEmail(String email) {
+        return Pattern.matches("^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$", email);
+    }
+
+    // Validación de teléfono (solo números y '+')
+    private boolean isValidPhone(String phone) {
+        return Pattern.matches("^\\+?[0-9]+$", phone);
     }
 }

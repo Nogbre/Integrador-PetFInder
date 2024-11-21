@@ -80,7 +80,7 @@ public class LoginFragment extends Fragment {
                         GraphQLResponse graphQLResponse = response.body();
                         if (graphQLResponse.getErrors() == null) {
                             try {
-                                // Obtén el token y el usuario de la respuesta
+                                // Procesa la respuesta si el login es exitoso
                                 String token = graphQLResponse.getData()
                                         .getAsJsonObject("login")
                                         .get("token")
@@ -103,19 +103,22 @@ public class LoginFragment extends Fragment {
                                 startActivity(intent);
                                 requireActivity().finish(); // Finaliza AuthActivity para no volver atrás
                             } catch (Exception e) {
-                                Toast.makeText(getContext(), "Error procesando la respuesta: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Error: " + graphQLResponse.getErrors().toString(), Toast.LENGTH_SHORT).show();
+                            // Muestra error de credenciales si la respuesta tiene errores
+                            Toast.makeText(getContext(), "Credenciales no válidas.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "Error en la respuesta del servidor.", Toast.LENGTH_SHORT).show();
+                        // Error en la respuesta del servidor
+                        Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<GraphQLResponse> call, Throwable t) {
-                    Toast.makeText(getContext(), "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    // Error de conexión o fallo en la solicitud
+                    Toast.makeText(getContext(), "Correo o Contrasena no son validos", Toast.LENGTH_SHORT).show();
                 }
             });
         });
