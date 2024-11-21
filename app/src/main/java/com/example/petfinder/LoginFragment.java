@@ -1,5 +1,6 @@
 package com.example.petfinder;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,11 +52,11 @@ public class LoginFragment extends Fragment {
             }
 
             // Define la mutación GraphQL para el login
-            String mutation = "mutation Login($email: String!, $contrase_a: String!) { " +
-                    "  login(email: $email, contrase_a: $contrase_a) { " +
+            String mutation = "mutation Login($email: String!, $password: String!) { " +
+                    "  login(input: { email: $email, password: $password }) { " +
                     "    token " +
                     "    usuario { " +
-                    "      _id " +
+                    "      id " +
                     "      nombre " +
                     "      email " +
                     "    } " +
@@ -65,7 +66,7 @@ public class LoginFragment extends Fragment {
             // Crea las variables para la mutación
             Map<String, Object> variables = new HashMap<>();
             variables.put("email", email);
-            variables.put("contrase_a", password);
+            variables.put("password", password);
 
             // Crea la solicitud GraphQL
             GraphQLRequest request = new GraphQLRequest(mutation, variables);
@@ -78,18 +79,34 @@ public class LoginFragment extends Fragment {
                     if (response.isSuccessful() && response.body() != null) {
                         GraphQLResponse graphQLResponse = response.body();
                         if (graphQLResponse.getErrors() == null) {
-                            String token = graphQLResponse.getData()
-                                    .getAsJsonObject("login")
-                                    .get("token")
-                                    .getAsString();
+                            try {
+                                // Obtén el token y el usuario de la respuesta
+                                String token = graphQLResponse.getData()
+                                        .getAsJsonObject("login")
+                                        .get("token")
+                                        .getAsString();
 
-                            // Guarda el token en SharedPreferences
-                            SharedPreferences sharedPreferences = getContext().getSharedPreferences("AppPrefs", getContext().MODE_PRIVATE);
-                            sharedPreferences.edit().putString("auth_token", token).apply();
+                                String userName = graphQLResponse.getData()
+                                        .getAsJsonObject("login")
+                                        .getAsJsonObject("usuario")
+                                        .get("nombre")
+                                        .getAsString();
 
-                            Toast.makeText(getContext(), "Inicio de sesión exitoso.", Toast.LENGTH_SHORT).show();
+                                // Guarda el token en SharedPreferences
+                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("AppPrefs", getContext().MODE_PRIVATE);
+                                sharedPreferences.edit().putString("auth_token", token).apply();
+
+                                Toast.makeText(getContext(), "Bienvenido, " + userName, Toast.LENGTH_SHORT).show();
+
+                                // Redirigir a MainActivity
+                                Intent intent = new Intent(getContext(), MainActivity.class);
+                                startActivity(intent);
+                                requireActivity().finish(); // Finaliza AuthActivity para no volver atrás
+                            } catch (Exception e) {
+                                Toast.makeText(getContext(), "Error procesando la respuesta: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(getContext(), "Error en el inicio de sesión: " + graphQLResponse.getErrors().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Error: " + graphQLResponse.getErrors().toString(), Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         Toast.makeText(getContext(), "Error en la respuesta del servidor.", Toast.LENGTH_SHORT).show();

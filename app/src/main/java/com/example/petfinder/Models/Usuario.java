@@ -18,10 +18,10 @@ public class Usuario {
     @SerializedName("email")
     private String email;
 
-    @SerializedName("contrase_a") // Asegurando el mapeo con el backend
+    @SerializedName("contrase_a")
     private String password;
 
-    // Constructor sin ID para registro
+
     public Usuario(String nombre, String apellido, String telefono, String email, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
