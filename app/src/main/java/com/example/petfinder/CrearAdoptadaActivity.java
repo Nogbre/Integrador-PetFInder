@@ -234,23 +234,47 @@ public class CrearAdoptadaActivity extends AppCompatActivity implements OnMapRea
 
 
     private void crearPublicacion(String ubicacionId) {
-        String mutation = "mutation CreatePublicacion($raza: String!, $especie: String!, $foto: String!, $descripcion: String!, $usuarioId:  String!, $ubicacionId:  String!) { " +
-                "  createPublicacion(input: {raza: $raza, especie: $especie, foto: $foto, descripcion: $descripcion, usuarioId: $usuarioId, ubicacionId: $ubicacionId}) { " +
+        String mutation = "mutation CreatePublicacion($raza: String!, $especie: String!, $foto: String!, $descripcion: String!, $usuarioId: String!, $ubicacionId: String!, $estado: String!, $color: String!, $tamanho: String!, $sexo: String!) { " +
+                "  createPublicacion(input: {raza: $raza, especie: $especie, foto: $foto, descripcion: $descripcion, usuarioId: $usuarioId, ubicacionId: $ubicacionId, estado: $estado, color: $color, tamanho: $tamanho, sexo: $sexo}) { " +
                 "    id " +
                 "    raza " +
                 "    especie " +
                 "    foto " +
                 "    descripcion " +
+                "    estado " +
+                "    color " +
+                "    tamanho " +
+                "    sexo " +
                 "  } " +
                 "}";
 
+        // Recopilamos los valores de los campos
+        String raza = razaSpinner.getSelectedItem().toString();
+        String especie = especieSpinner.getSelectedItem().toString();
+        String foto = imagenUri.toString();
+        String descripcion = descripcionField.getText().toString().trim();
+        String estado = "Encontrada"; // Valor estático o dinámico según el tipo de publicación
+        String color = colorField.getText().toString().trim();
+        String tamanho = tamanhoField.getText().toString().trim();
+        String sexo = sexoSpinner.getSelectedItem().toString();
+
+        // Validamos que todos los valores estén presentes antes de enviar la mutación
+        if (color.isEmpty() || tamanho.isEmpty() || descripcion.isEmpty() || sexo.isEmpty()) {
+            Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Map<String, Object> variables = new HashMap<>();
-        variables.put("raza", razaSpinner.getSelectedItem().toString());
-        variables.put("especie", especieSpinner.getSelectedItem().toString());
-        variables.put("foto", imagenUri.toString());
-        variables.put("descripcion", descripcionField.getText().toString().trim());
-        variables.put("usuarioId", usuarioId); // Obtenido automáticamente al inicio de sesión
+        variables.put("raza", raza);
+        variables.put("especie", especie);
+        variables.put("foto", foto);
+        variables.put("descripcion", descripcion);
+        variables.put("usuarioId", usuarioId);
         variables.put("ubicacionId", ubicacionId);
+        variables.put("estado", estado);
+        variables.put("color", color);
+        variables.put("tamanho", tamanho);
+        variables.put("sexo", sexo);
 
         GraphQLRequest request = new GraphQLRequest(mutation, variables);
 
@@ -272,4 +296,5 @@ public class CrearAdoptadaActivity extends AppCompatActivity implements OnMapRea
             }
         });
     }
+
 }
