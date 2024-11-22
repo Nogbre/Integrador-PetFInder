@@ -1,4 +1,6 @@
 package com.example.petfinder.Models;
+import com.example.petfinder.Models.GraphQLRequest;
+
 
 public class GraphQLRequest {
     private String query;

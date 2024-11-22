@@ -22,5 +22,3 @@ public class GraphQLResponse {
         this.errors = errors;
     }
 }
-
-

@@ -28,7 +28,7 @@ import retrofit2.Response;
 public class LoginFragment extends Fragment {
 
     public LoginFragment() {
-        // Required empty public constructor
+        // Constructor requerido
     }
 
     @Nullable
@@ -51,76 +51,8 @@ public class LoginFragment extends Fragment {
                 return;
             }
 
-            // Define la mutación GraphQL para el login
-            String mutation = "mutation Login($email: String!, $password: String!) { " +
-                    "  login(input: { email: $email, password: $password }) { " +
-                    "    token " +
-                    "    usuario { " +
-                    "      id " +
-                    "      nombre " +
-                    "      email " +
-                    "    } " +
-                    "  } " +
-                    "}";
-
-            // Crea las variables para la mutación
-            Map<String, Object> variables = new HashMap<>();
-            variables.put("email", email);
-            variables.put("password", password);
-
-            // Crea la solicitud GraphQL
-            GraphQLRequest request = new GraphQLRequest(mutation, variables);
-
-            // Llama al endpoint de GraphQL
-            ApiService apiService = ApiClient.getClient().create(ApiService.class);
-            apiService.executeGraphQL(request).enqueue(new Callback<GraphQLResponse>() {
-                @Override
-                public void onResponse(Call<GraphQLResponse> call, Response<GraphQLResponse> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        GraphQLResponse graphQLResponse = response.body();
-                        if (graphQLResponse.getErrors() == null) {
-                            try {
-                                // Procesa la respuesta si el login es exitoso
-                                String token = graphQLResponse.getData()
-                                        .getAsJsonObject("login")
-                                        .get("token")
-                                        .getAsString();
-
-                                String userName = graphQLResponse.getData()
-                                        .getAsJsonObject("login")
-                                        .getAsJsonObject("usuario")
-                                        .get("nombre")
-                                        .getAsString();
-
-                                // Guarda el token en SharedPreferences
-                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("AppPrefs", getContext().MODE_PRIVATE);
-                                sharedPreferences.edit().putString("auth_token", token).apply();
-
-                                Toast.makeText(getContext(), "Bienvenido, " + userName, Toast.LENGTH_SHORT).show();
-
-                                // Redirigir a MainActivity
-                                Intent intent = new Intent(getContext(), MainActivity.class);
-                                startActivity(intent);
-                                requireActivity().finish(); // Finaliza AuthActivity para no volver atrás
-                            } catch (Exception e) {
-                                Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            // Muestra error de credenciales si la respuesta tiene errores
-                            Toast.makeText(getContext(), "Credenciales no válidas.", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        // Error en la respuesta del servidor
-                        Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<GraphQLResponse> call, Throwable t) {
-                    // Error de conexión o fallo en la solicitud
-                    Toast.makeText(getContext(), "Correo o Contrasena no son validos", Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Llama al método para iniciar sesión
+            iniciarSesion(email, password);
         });
 
         // Acción para el enlace de registro
@@ -132,5 +64,87 @@ public class LoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void iniciarSesion(String email, String password) {
+        // Define la mutación GraphQL para el inicio de sesión
+        String mutation = "mutation Login($email: String!, $password: String!) { " +
+                "  login(input: { email: $email, password: $password }) { " +
+                "    token " +
+                "    usuario { " +
+                "      id " +
+                "      nombre " +
+                "      email " +
+                "    } " +
+                "  } " +
+                "}";
+
+        // Crea las variables para la mutación
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("email", email);
+        variables.put("password", password);
+
+        // Crea la solicitud GraphQL
+        GraphQLRequest request = new GraphQLRequest(mutation, variables);
+
+        // Llama al endpoint de GraphQL
+        ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        apiService.executeGraphQL(request).enqueue(new Callback<GraphQLResponse>() {
+            @Override
+            public void onResponse(Call<GraphQLResponse> call, Response<GraphQLResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    GraphQLResponse graphQLResponse = response.body();
+                    if (graphQLResponse.getErrors() == null) {
+                        try {
+                            // Procesa la respuesta si el inicio de sesión es exitoso
+                            String usuarioId = graphQLResponse.getData()
+                                    .getAsJsonObject("login")
+                                    .getAsJsonObject("usuario")
+                                    .get("id")
+                                    .getAsString();
+
+                            String token = graphQLResponse.getData()
+                                    .getAsJsonObject("login")
+                                    .get("token")
+                                    .getAsString();
+
+                            String userName = graphQLResponse.getData()
+                                    .getAsJsonObject("login")
+                                    .getAsJsonObject("usuario")
+                                    .get("nombre")
+                                    .getAsString();
+
+                            // Guarda el usuarioId y el token en SharedPreferences
+                            SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UsuarioAuth", requireContext().MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("usuarioId", usuarioId);
+                            editor.putString("auth_token", token);
+                            editor.apply();
+
+                            Toast.makeText(getContext(), "Bienvenido, " + userName, Toast.LENGTH_SHORT).show();
+
+                            // Redirigir a MainActivity
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            startActivity(intent);
+                            requireActivity().finish(); // Finaliza AuthActivity para no volver atrás
+                        } catch (Exception e) {
+                            Toast.makeText(getContext(), "Error procesando la respuesta.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Muestra error de credenciales si la respuesta tiene errores
+                        Toast.makeText(getContext(), "Credenciales no válidas.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    // Error en la respuesta del servidor
+                    Toast.makeText(getContext(), "Error en la respuesta del servidor.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GraphQLResponse> call, Throwable t) {
+                // Error de conexión o fallo en la solicitud
+                Toast.makeText(getContext(), "Error de conexión.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

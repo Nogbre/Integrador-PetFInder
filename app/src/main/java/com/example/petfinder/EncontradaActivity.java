@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.petfinder.Models.GraphQLRequest;
 import com.example.petfinder.Models.GraphQLResponse;
 import com.example.petfinder.Models.Publicacion;
+import com.example.petfinder.Models.Ubicacion;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +35,7 @@ public class EncontradaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_encontrada);
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         // Configurar RecyclerView
         recyclerView = findViewById(R.id.recyclerAdoptada);
@@ -48,28 +43,33 @@ public class EncontradaActivity extends AppCompatActivity {
         adapter = new EncontradaAdapter(publicaciones);
         recyclerView.setAdapter(adapter);
 
-        // Botón para agregar una nueva mascota encontrada
         Button btnAgregar = findViewById(R.id.btnAgregarAdoptada);
         btnAgregar.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CrearAdoptadaActivity.class);
+            Intent intent = new Intent(EncontradaActivity.this, CrearAdoptadaActivity.class);
             startActivity(intent);
         });
-
         // Cargar datos desde la API
         cargarMascotasEncontradas();
     }
 
     private void cargarMascotasEncontradas() {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        String query = "{ publicaciones(tipo: \"Encontrada\") { id, raza, especie, foto, descripcion } }";
+        String query = "{ publicaciones { id, raza, especie, foto, descripcion } }"; // Ajustar la consulta según el esquema del servidor
+
         GraphQLRequest request = new GraphQLRequest(query, null);
 
         apiService.executeGraphQL(request).enqueue(new Callback<GraphQLResponse>() {
             @Override
             public void onResponse(Call<GraphQLResponse> call, Response<GraphQLResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Publicacion> nuevasPublicaciones = parsearPublicaciones(response.body());
-                    adapter.updateData(nuevasPublicaciones);
+                    List<Publicacion> todasLasPublicaciones = parsearPublicaciones(response.body());
+                    List<Publicacion> publicacionesEncontradas = new ArrayList<>();
+                    for (Publicacion publicacion : todasLasPublicaciones) {
+                        if ("Encontrada".equals(publicacion.getTipo())) {
+                            publicacionesEncontradas.add(publicacion);
+                        }
+                    }
+                    adapter.updateData(publicacionesEncontradas);
                 } else {
                     Toast.makeText(EncontradaActivity.this, "Error cargando datos", Toast.LENGTH_SHORT).show();
                 }
@@ -82,16 +82,30 @@ public class EncontradaActivity extends AppCompatActivity {
         });
     }
 
+
+    // Aquí es donde debe ir el método parsearPublicaciones
     private List<Publicacion> parsearPublicaciones(GraphQLResponse response) {
         List<Publicacion> publicaciones = new ArrayList<>();
         try {
             response.getData().getAsJsonArray("publicaciones").forEach(jsonElement -> {
+                JsonObject publicacionJson = jsonElement.getAsJsonObject();
                 Publicacion publicacion = new Publicacion();
-                publicacion.setId(jsonElement.getAsJsonObject().get("id").getAsString());
-                publicacion.setRaza(jsonElement.getAsJsonObject().get("raza").getAsString());
-                publicacion.setEspecie(jsonElement.getAsJsonObject().get("especie").getAsString());
-                publicacion.setFoto(jsonElement.getAsJsonObject().get("foto").getAsString());
-                publicacion.setDescripcion(jsonElement.getAsJsonObject().get("descripcion").getAsString());
+
+                publicacion.setId(publicacionJson.get("id").getAsString());
+                publicacion.setRaza(publicacionJson.get("raza").getAsString());
+                publicacion.setEspecie(publicacionJson.get("especie").getAsString());
+                publicacion.setFoto(publicacionJson.get("foto").getAsString());
+                publicacion.setDescripcion(publicacionJson.get("descripcion").getAsString());
+
+                // Procesar la ubicación
+                JsonObject ubicacionJson = publicacionJson.getAsJsonObject("ubicacion");
+                if (ubicacionJson != null) {
+                    Ubicacion ubicacion = new Ubicacion();
+                    ubicacion.setLatitud(ubicacionJson.get("latitud").getAsDouble());
+                    ubicacion.setLongitud(ubicacionJson.get("longitud").getAsDouble());
+                    publicacion.setUbicacion(ubicacion);
+                }
+
                 publicaciones.add(publicacion);
             });
         } catch (Exception e) {
@@ -101,3 +115,4 @@ public class EncontradaActivity extends AppCompatActivity {
         return publicaciones;
     }
 }
+

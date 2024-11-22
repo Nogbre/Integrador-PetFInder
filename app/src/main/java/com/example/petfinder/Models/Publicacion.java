@@ -24,17 +24,21 @@ public class Publicacion {
     @SerializedName("tipo") // Tipo de publicación: Adopción, Perdida, Encontrada
     private String tipo;
 
+    @SerializedName("ubicacion") // Relación con la ubicación (latitud y longitud)
+    private Ubicacion ubicacion;
+
     // Constructor vacío (obligatorio para Gson)
     public Publicacion() {}
 
-    // Constructor para crear una publicación
-    public Publicacion(String nombre, String raza, String especie, String foto, String descripcion, String tipo) {
+    // Constructor para crear una publicación con todos los campos
+    public Publicacion(String nombre, String raza, String especie, String foto, String descripcion, String tipo, Ubicacion ubicacion) {
         this.nombre = nombre;
         this.raza = raza;
         this.especie = especie;
         this.foto = foto;
         this.descripcion = descripcion;
         this.tipo = tipo;
+        this.ubicacion = ubicacion;
     }
 
     // Getters y Setters
@@ -92,5 +96,13 @@ public class Publicacion {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }

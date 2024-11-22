@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- permite al dispositivo la ubicacion -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,18 +26,10 @@
         <activity
             android:name=".EncontradaActivity"
             android:exported="false" />
-        <activity
-            android:name=".AgregarPublicacionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PublicacionesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CreateAdopcion"
-            android:exported="false" />
-        <activity
-            android:name=".Adopciones"
-            android:exported="false" /> <!-- AuthActivity como la actividad inicial -->
+
+
+
+         <!-- AuthActivity como la actividad inicial -->
         <activity
             android:name=".AuthActivity"
             android:exported="true">
