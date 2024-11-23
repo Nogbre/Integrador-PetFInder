@@ -5,11 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,16 +41,17 @@ public class EncontradaActivity extends AppCompatActivity {
 
         Button btnAgregar = findViewById(R.id.btnAgregarAdoptada);
         btnAgregar.setOnClickListener(v -> {
-            Intent intent = new Intent(EncontradaActivity.this, CrearAdoptadaActivity.class);
+            Intent intent = new Intent(EncontradaActivity.this, CrearEncontradaActivity.class);
             startActivity(intent);
         });
+
         // Cargar datos desde la API
         cargarMascotasEncontradas();
     }
 
     private void cargarMascotasEncontradas() {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
-        String query = "{ publicaciones { id, raza, especie, foto, descripcion } }"; // Ajustar la consulta según el esquema del servidor
+        String query = "{ publicaciones { id, raza, especie, foto, descripcion, estado } }"; // Cambiado a 'estado'
 
         GraphQLRequest request = new GraphQLRequest(query, null);
 
@@ -65,7 +62,7 @@ public class EncontradaActivity extends AppCompatActivity {
                     List<Publicacion> todasLasPublicaciones = parsearPublicaciones(response.body());
                     List<Publicacion> publicacionesEncontradas = new ArrayList<>();
                     for (Publicacion publicacion : todasLasPublicaciones) {
-                        if ("Encontrada".equals(publicacion.getTipo())) {
+                        if ("Encontrada".equals(publicacion.getEstado())) { // Cambiado a 'estado'
                             publicacionesEncontradas.add(publicacion);
                         }
                     }
@@ -83,7 +80,7 @@ public class EncontradaActivity extends AppCompatActivity {
     }
 
 
-    // Aquí es donde debe ir el método parsearPublicaciones
+
     private List<Publicacion> parsearPublicaciones(GraphQLResponse response) {
         List<Publicacion> publicaciones = new ArrayList<>();
         try {
@@ -97,13 +94,9 @@ public class EncontradaActivity extends AppCompatActivity {
                 publicacion.setFoto(publicacionJson.get("foto").getAsString());
                 publicacion.setDescripcion(publicacionJson.get("descripcion").getAsString());
 
-                // Procesar la ubicación
-                JsonObject ubicacionJson = publicacionJson.getAsJsonObject("ubicacion");
-                if (ubicacionJson != null) {
-                    Ubicacion ubicacion = new Ubicacion();
-                    ubicacion.setLatitud(ubicacionJson.get("latitud").getAsDouble());
-                    ubicacion.setLongitud(ubicacionJson.get("longitud").getAsDouble());
-                    publicacion.setUbicacion(ubicacion);
+                // Cambiar a estado
+                if (publicacionJson.has("estado") && !publicacionJson.get("estado").isJsonNull()) {
+                    publicacion.setEstado(publicacionJson.get("estado").getAsString()); // Mapear estado
                 }
 
                 publicaciones.add(publicacion);
@@ -114,5 +107,6 @@ public class EncontradaActivity extends AppCompatActivity {
         }
         return publicaciones;
     }
-}
 
+
+}

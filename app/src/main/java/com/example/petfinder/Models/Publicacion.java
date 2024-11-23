@@ -21,8 +21,8 @@ public class Publicacion {
     @SerializedName("descripcion") // Información adicional
     private String descripcion;
 
-    @SerializedName("tipo") // Tipo de publicación: Adopción, Perdida, Encontrada
-    private String tipo;
+    @SerializedName("estado")
+    private String estado;
 
     @SerializedName("ubicacion") // Relación con la ubicación (latitud y longitud)
     private Ubicacion ubicacion;
@@ -37,7 +37,7 @@ public class Publicacion {
         this.especie = especie;
         this.foto = foto;
         this.descripcion = descripcion;
-        this.tipo = tipo;
+        this.estado = estado;
         this.ubicacion = ubicacion;
     }
 
@@ -90,12 +90,12 @@ public class Publicacion {
         this.descripcion = descripcion;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Ubicacion getUbicacion() {

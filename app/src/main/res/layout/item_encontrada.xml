@@ -20,8 +20,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-             />
+            android:scaleType="centerCrop" />
 
         <!-- Contenedor de texto -->
         <LinearLayout
@@ -30,8 +29,6 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_vertical">
-
-            <!-- Nombre de la mascota -->
 
             <!-- Raza de la mascota -->
             <TextView
@@ -45,9 +42,17 @@
                 android:ellipsize="end"
                 android:maxLines="1" />
 
-            <!-- Etiqueta opcional de estado -->
+            <!-- Descripción de la mascota -->
+            <TextView
+                android:id="@+id/mascota_descripcion_encontrada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción de la Mascota"
+                android:textSize="14sp"
+                android:textColor="@color/secondary_text"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="4" />
         </LinearLayout>
-
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -42,7 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CrearAdoptadaActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class CrearEncontradaActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int REQUEST_IMAGE_PICK = 1;
     private static final int PERMISSION_REQUEST_CODE = 100;
@@ -221,13 +220,13 @@ public class CrearAdoptadaActivity extends AppCompatActivity implements OnMapRea
                             .get("id").getAsString();
                     crearPublicacion(ubicacionId);
                 } else {
-                    Toast.makeText(CrearAdoptadaActivity.this, "Error al crear la ubicación", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrearEncontradaActivity.this, "Error al crear la ubicación", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GraphQLResponse> call, Throwable t) {
-                Toast.makeText(CrearAdoptadaActivity.this, "Error de conexión al crear ubicación", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CrearEncontradaActivity.this, "Error de conexión al crear ubicación", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -283,16 +282,16 @@ public class CrearAdoptadaActivity extends AppCompatActivity implements OnMapRea
             @Override
             public void onResponse(Call<GraphQLResponse> call, Response<GraphQLResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(CrearAdoptadaActivity.this, "Publicación creada con éxito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrearEncontradaActivity.this, "Publicación creada con éxito", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(CrearAdoptadaActivity.this, "Error al crear publicación", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrearEncontradaActivity.this, "Error al crear publicación", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GraphQLResponse> call, Throwable t) {
-                Toast.makeText(CrearAdoptadaActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CrearEncontradaActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

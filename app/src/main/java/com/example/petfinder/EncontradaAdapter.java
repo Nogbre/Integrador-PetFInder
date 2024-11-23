@@ -18,7 +18,6 @@ public class EncontradaAdapter extends RecyclerView.Adapter<EncontradaAdapter.En
 
     private List<Publicacion> publicaciones;
 
-    // Constructor
     public EncontradaAdapter(List<Publicacion> publicaciones) {
         this.publicaciones = publicaciones;
     }
@@ -26,17 +25,13 @@ public class EncontradaAdapter extends RecyclerView.Adapter<EncontradaAdapter.En
     @NonNull
     @Override
     public EncontradaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflar el diseño de item_encontrada.xml
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_encontrada, parent, false);
         return new EncontradaViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EncontradaViewHolder holder, int position) {
-        // Obtener la publicación actual
         Publicacion publicacion = publicaciones.get(position);
-
-        // Configurar la especie
 
         // Configurar la raza
         String raza = publicacion.getRaza();
@@ -44,6 +39,14 @@ public class EncontradaAdapter extends RecyclerView.Adapter<EncontradaAdapter.En
             holder.razaTextView.setText("Raza: Desconocida");
         } else {
             holder.razaTextView.setText("Raza: " + raza);
+        }
+
+        // Configurar la descripción
+        String descripcion = publicacion.getDescripcion();
+        if (descripcion == null || descripcion.isEmpty()) {
+            holder.descripcionTextView.setText("Descripción: No disponible");
+        } else {
+            holder.descripcionTextView.setText("Descripción: " + descripcion);
         }
 
         // Cargar la foto de la mascota usando Glide
@@ -57,20 +60,19 @@ public class EncontradaAdapter extends RecyclerView.Adapter<EncontradaAdapter.En
         return publicaciones.size();
     }
 
-    // Método para actualizar los datos del Adapter
     public void updateData(List<Publicacion> nuevasPublicaciones) {
         this.publicaciones = nuevasPublicaciones;
         notifyDataSetChanged();
     }
 
-    // Clase ViewHolder interna
     public static class EncontradaViewHolder extends RecyclerView.ViewHolder {
-        TextView razaTextView;
+        TextView razaTextView, descripcionTextView;
         ImageView fotoImageView;
 
         public EncontradaViewHolder(@NonNull View itemView) {
             super(itemView);
             razaTextView = itemView.findViewById(R.id.mascota_raza_encontrada);
+            descripcionTextView = itemView.findViewById(R.id.mascota_descripcion_encontrada);
             fotoImageView = itemView.findViewById(R.id.mascota_foto_encontrada);
         }
     }
